@@ -1,0 +1,54 @@
+DATASHEET
+
+MOTORS <command>
+       MOVE_FORWARD <speed> - двигаться вперед с определенной скоростью
+       MOVE_BACKWORD <speed> - двигаться назад с определенной скоростью
+       TURN_LEFT <speed> - повернуться налево с определенной скоростью
+       TURN_RIGHT <speed> - повернуться направо с определенной скоростью
+       ACTION - получить текущее действие
+       STOP - остановить текущее действие
+
+EYE <id> <command>
+         ANIMATE <id> - отобразить анимацию
+         OFF - выключить подсветку дисплея
+         ON - включить подсветку дисплея
+
+SENSORS <id> <command>
+             DATA - получить данные с сенсора
+             INIT - реинициализоровать/инициализоровать сенсор
+
+HEAD <command>
+     TURN_LEFT <speed> - повернуть голову налево с определенной скоростью
+     TURN_RIGHT <speed> - повернуть голову направо с определенной скоростью
+     ACTION - получить текущее действие
+     STOP - остановить текущее действие
+
+HANDS <id> <command>
+           SET <positions array> - установить позиции серв для руки
+           RESET - вернуть руку в начальное состояние
+           ANIMATE <id> - проиграть анимацию для серв руки
+
+SYS <command>
+    BATTERY - получить текущий заряд аккумулятора
+    TEMPERATURE - получить текущую среднюю температуру устройств
+
+USING EXAMPLE
+
+SERVER> MOTORS MOVE_FORWARD 50
+ARDUINO> OK
+
+SERVER> MOTORS ACTION
+ARDUINO> MOVE_FORWARD
+
+SERVER> MOTORS STOP
+ARDUINO> OK
+
+SERVER> SENSORS 0 DATA
+ARDUINO> 123.0
+
+SERVER> SYS BATTERY
+ARDUINO> 65.0
+
+SERVER> HANDS 0 SET (0, 10, 0, 10,
+                     10, 0, 10, 0)
+ARDUINO> OK

@@ -1,1 +1,1 @@
-The most intelligent robot in the world from Robotelsa :)
+The most intelligent robot in the world from Robotelsa

@@ -1,1 +1,1 @@
-__all__ = ['dialog']
+__all__ = ['dialog', 'voice']
