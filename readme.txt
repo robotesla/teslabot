@@ -1,4 +1,4 @@
-PROTOCOL DATASHEET
+ROBOT PROTOCOL DATASHEET 1.1
 
 MOTORS <command>
        MOVE_FORWARD <speed> - двигаться вперед с определенной скоростью
