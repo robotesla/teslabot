@@ -1,6 +1,10 @@
-# Protocol Datasheet
+# Teslabot
 
-## Motors
+The most intelligent robot in the world 😃
+
+## Protocol Datasheet
+
+### Motors
 
 ```
 MOTORS <command>
@@ -12,7 +16,7 @@ MOTORS <command>
        STOP - остановить текущее действие
 ```
 
-## Eyes
+### Eyes
 
 ```
 EYE <id> <command>
@@ -21,7 +25,7 @@ EYE <id> <command>
          ON - включить подсветку дисплея
 ```
 
-## Sensors
+### Sensors
 
 ```
 SENSORS <id> <command>
@@ -29,7 +33,7 @@ SENSORS <id> <command>
              INIT - реинициализоровать/инициализоровать сенсор
 ```
 
-## Head
+### Head
 
 ```
 HEAD <command>
@@ -39,7 +43,7 @@ HEAD <command>
      STOP - остановить текущее действие
 ```
 
-## Hands
+### Hands
 
 ```
 HANDS <id> <command>
@@ -48,7 +52,7 @@ HANDS <id> <command>
            ANIMATE <id> - проиграть анимацию для серв руки
 ```
 
-## System
+### System
 
 ```
 SYS <command>
@@ -58,7 +62,7 @@ SYS <command>
     DFU - перейти в режим обновления программного обеспечения
 ```
 
-## Emotions
+### Emotions
 
 | ID | Description            |
 |----|------------------------|
