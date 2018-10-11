@@ -9,5 +9,5 @@ void setup() {
 void loop() {
   if (Serial.read() != -1)
     delay(200);
-    Serial.println("LALKA");
+    Serial.println("Test message");
 }
