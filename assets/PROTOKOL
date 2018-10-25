@@ -1,0 +1,173 @@
+
+#include <NewPing.h>
+
+
+#define EchoPinLeftF 5 //  + +
+#define EchoPinLeftB 2  // + +
+#define EchoPinRightF A2 // + +
+#define EchoPinRightB A0 // + +
+#define TrigPinLeftF 6 // +  +
+#define TrigPinLeftB 9 //+ +
+#define TrigPinRightF A3 // + +
+#define TrigPinRightB 4  // + +
+
+#define EN_A 10 // +
+#define EN_B 11 // +
+#define IN_1 8 //+
+#define IN_2 7 //+
+#define IN_3 3 //+
+#define IN_4 A1 //+  // все пины проверены
+
+#define MAX_DISTANCE 500
+
+#define DEBUG 1
+#define BASIC 2
+
+//int WORK_MODE = DEBUG;
+int WORK_MODE = BASIC;
+
+NewPing sonarLF(TrigPinLeftF, EchoPinLeftF, MAX_DISTANCE);   //дальномеры
+NewPing sonarLB(TrigPinLeftB, EchoPinLeftB, MAX_DISTANCE);
+NewPing sonarRF(TrigPinRightF, EchoPinRightF, MAX_DISTANCE);
+NewPing sonarRB(TrigPinRightB, EchoPinRightB, MAX_DISTANCE);
+
+String command;
+String param1;
+
+unsigned long lastcommand;
+
+void setup()
+{
+  Serial.begin(9600);  // установка порта на скорость 9600 бит/сек
+  // Объявляем переменную для хранения введенного символа
+  // put your setup code here, to run once:
+  pinMode(EN_A, OUTPUT);
+  pinMode(EN_B, OUTPUT);
+  pinMode(IN_1, OUTPUT);
+  pinMode(IN_2, OUTPUT);
+  pinMode(IN_3, OUTPUT);
+  pinMode(IN_4, OUTPUT);
+
+
+}
+
+void loop()
+{
+
+  while (Serial.available()) {
+
+    char incomingChar = Serial.read();
+    if ((incomingChar >= 'A' && incomingChar <= 'Z') || incomingChar == '_') {
+      command += incomingChar;
+    }
+
+    if (incomingChar >= '0' && incomingChar <= '9') {
+
+      param1 += incomingChar;
+    }
+    else
+    {
+      if (incomingChar == '\n') {
+
+        int val;
+
+        int lf = (sonarLF.ping_cm());
+        int lb = (sonarLB.ping_cm());
+        int rf = (sonarRF.ping_cm());
+        int rb = (sonarRB.ping_cm());
+
+        lastcommand = command;
+
+        if (command == "MOVE_FORWARD") {         //Если принят символ '1',
+          analogWrite (EN_A, param1.toInt());
+          analogWrite (EN_B, param1.toInt());
+          digitalWrite (IN_1, LOW);
+          digitalWrite (IN_2, HIGH);
+          digitalWrite (IN_3, HIGH);
+          digitalWrite (IN_4, LOW);
+
+        }
+
+        if (command == "TURN_RIGHT") {            //Если принят символ '2',
+          analogWrite (EN_A, param1.toInt());
+          analogWrite (EN_B, param1.toInt());
+          digitalWrite (IN_1, HIGH);
+          digitalWrite (IN_2, LOW);
+          digitalWrite (IN_3, HIGH);
+          digitalWrite (IN_4, LOW);
+          delay (600);
+          digitalWrite (IN_1, LOW);
+          digitalWrite (IN_2, LOW);
+          digitalWrite (IN_3, LOW);
+          digitalWrite (IN_4, LOW);
+        }
+
+        if (val == "TURN_LEFT") {         //Если принят символ '3',
+          analogWrite (EN_A, param1.toInt());
+          analogWrite (EN_B, param1.toInt());
+          digitalWrite (IN_1, LOW);
+          digitalWrite (IN_2, HIGH);
+          digitalWrite (IN_3, LOW);
+          digitalWrite (IN_4, HIGH);
+          delay (600);
+          digitalWrite (IN_1, LOW);
+          digitalWrite (IN_2, LOW);
+          digitalWrite (IN_3, LOW);
+          digitalWrite (IN_4, LOW);
+        }
+
+        if (command == "MOVE_BACKWARD") { //Если принят символ '4',
+
+          analogWrite (EN_A, param1.toInt());
+          analogWrite (EN_B, param1.toInt());
+          digitalWrite (IN_1, HIGH);
+          digitalWrite (IN_2, LOW);
+          digitalWrite (IN_3, LOW);
+          digitalWrite (IN_4, HIGH);
+        }
+        if (command == "STOP_ACTION") { //Если принят символ '4',
+
+          analogWrite (EN_A, param1.toInt());
+          analogWrite (EN_B, param1.toInt());
+          digitalWrite (IN_1, LOW);
+          digitalWrite (IN_2, LOW);
+          digitalWrite (IN_3, LOW);
+          digitalWrite (IN_4, LOW);
+        }
+
+        if (command == "DATA_LEFT_FORWARD")
+        {
+          Serial.println (lf);
+        }
+
+        if (command == "DATA_LEFT_BACKWARD")
+        {
+          Serial.println (lb);
+        }
+        if (command == "DATA_RIGHT_BACKWARD")
+        {
+          Serial.println (rb);
+        }
+        if (command == "DATA_RIGHT_FORWARD")
+        {
+          Serial.println (rf);
+        }
+        if (command == "GET_ACTION")
+        {
+          Serial.println (lastcommand);
+        }
+
+
+        if (WORK_MODE == DEBUG)
+        {
+          Serial.println (command);
+          Serial.println (param1.toInt());
+        }
+        command = "";
+        param1 = "";
+      }
+
+    }
+  }
+}
+
