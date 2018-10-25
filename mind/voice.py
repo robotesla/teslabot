@@ -4,8 +4,15 @@ from pygame import mixer
 from pygame.time import delay
 from os import remove
 from platform import system
+from console import debugprint
 
 r = sr.Recognizer()
+
+debugprint('Information', 'Adjusting for ambient noise...')
+with sr.Microphone() as source:
+	r.adjust_for_ambient_noise(source)
+debugprint('Information', 'Adjust for ambient noise done.')
+
 tts = TTS("oksana", "mp3", "60556d09-0e84-42b7-8974-9d0b01cfee33")
 mixer.init(frequency=48000)
 
@@ -24,7 +31,7 @@ def listen():
 	except sr.RequestError:
 		return 2
 
-def say(text, savepath = 'phrases/livespeech.mp3'):
+def say(text, savepath='phrases/livespeech.mp3'):
 	'''
 	Instantly to synthesize the text
 	and speak it through the speakers
@@ -33,9 +40,9 @@ def say(text, savepath = 'phrases/livespeech.mp3'):
 	tts.save(savepath)
 	play_mp3(savepath)
 	remove(savepath)
-	# print('Done.')
+	debugprint('Information', 'Speeching done.')
 
-def play_mp3(file_path, iswait = True):
+def play_mp3(file_path, iswait=True):
 	'''
 	Plays local mp3 file from
 	the hard drive
@@ -45,3 +52,4 @@ def play_mp3(file_path, iswait = True):
 	if iswait == True:
 		while mixer.music.get_busy():
 			delay(0)
+	debugprint('Information', 'Success played mp3.')

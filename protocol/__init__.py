@@ -1,9 +1,8 @@
 from serial import Serial
-ser = Serial('/dev/cu.usbmodem14201') # connect to arduino tru serial port
+ser = Serial('/dev/cu.usbserial-1410', 9600) # connect to arduino tru serial port
 
 def send(command):
-	ser.write(command.encode())
-	return True
+	return ser.write((command + '\nl').encode())
 
 def recive():
     return ser.readline()[:-2]

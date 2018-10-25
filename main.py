@@ -1,5 +1,7 @@
 from mind.voice import *
 from mind.dialog import *
+from protocol.motors import move_forward
+from protocol.motors import stop_action
 from cv2 import VideoCapture
 from cv2 import cvtColor
 from cv2 import COLOR_BGR2GRAY
@@ -24,6 +26,7 @@ while True:
 	if len(faces) != 0:
 		for (x, y, w, h) in faces:
 			print('Face detected at ' + str(x) + ', ' + str(y))
+			stop_action()
 		if is_face_found == False:
 			say('Привет!')
 
@@ -35,5 +38,6 @@ while True:
 		neural_answer = get_response(listened_text)
 		say(str(neural_answer))
 	else:
-		print('Faces not found.')
+		print('Faces not found. Going forward.')
+		move_forward(255)
 		is_face_found = False

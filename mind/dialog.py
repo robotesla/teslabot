@@ -1,5 +1,5 @@
 from chatterbot import ChatBot
-chatbot = ChatBot('Робот', read_only=False)
+chatbot = ChatBot('Тесла Бот', read_only=False)
 
 def get_response(body):
 	'''
