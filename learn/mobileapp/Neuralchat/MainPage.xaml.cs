@@ -28,6 +28,7 @@ namespace Neuralchat
                     this.Title = "Получение ответа...";
                     string responce = await new WebClient().DownloadStringTaskAsync(new Uri("http://192.168.0.101:5000/api_v1/learning/get_responce?body=" + sender.Text));
                     messages.Add(new Message { Body = responce, Sender = "Нейронная сеть" });
+                    messagesList.ScrollTo(messages[messages.Count - 1], ScrollToPosition.End, true);
                     this.Title = "Обучение нейросети";
                     sender.Text = String.Empty;
                 }
