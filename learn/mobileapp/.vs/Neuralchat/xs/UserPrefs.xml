@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{BD3FB765-EE7B-43E2-B299-3B00A19F6F04}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Neuralchat/MainPage.xaml.cs">
+    <Files>
+      <File FileName="Neuralchat/MainPage.xaml.cs" Line="22" Column="54" />
+      <File FileName="Neuralchat/MainPage.xaml" Line="26" Column="15" />
+      <File FileName="Neuralchat/Models/Message.cs" Line="7" Column="43" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Neuralchat.Android PreferredExecutionTarget="Android.00c951608491b953" AndroidDesignerPreferredTheme="Theme.DeviceDefault.NoActionBar.Fullscreen" />
+  <MonoDevelop.Ide.ItemProperties.Neuralchat.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.346EA588-6C18-419A-AE4F-399A5462394A" />
+  <MultiItemStartupConfigurations />
+</Properties>

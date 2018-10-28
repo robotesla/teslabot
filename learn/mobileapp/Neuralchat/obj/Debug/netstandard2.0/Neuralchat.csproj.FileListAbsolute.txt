@@ -1,0 +1,12 @@
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/bin/Debug/netstandard2.0/Neuralchat.deps.json
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/bin/Debug/netstandard2.0/Neuralchat.dll
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/bin/Debug/netstandard2.0/Neuralchat.pdb
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/Neuralchat.csprojAssemblyReference.cache
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/MainPage.xaml.g.cs
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/Neuralchat.csproj.CoreCompileInputs.cache
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/Neuralchat.AssemblyInfoInputs.cache
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/Neuralchat.AssemblyInfo.cs
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/Neuralchat.dll
+/Users/ketsu8/Projects/Neuralchat/Neuralchat/obj/Debug/netstandard2.0/Neuralchat.pdb
