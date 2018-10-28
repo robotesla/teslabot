@@ -26,7 +26,7 @@ namespace Neuralchat
                 try
                 {
                     this.Title = "Получение ответа...";
-                    string responce = await GetResponceFromNeuralNetwork(sender.Text);
+                    string responce = await new WebClient().DownloadStringTaskAsync(new Uri("http://192.168.0.101:5000/api_v1/learning/get_responce?body=" + sender.Text));
                     messages.Add(new Message { Body = responce, Sender = "Нейронная сеть" });
                     this.Title = "Обучение нейросети";
                     sender.Text = String.Empty;
@@ -36,14 +36,6 @@ namespace Neuralchat
                     await DisplayAlert("Ошибка", "Произошла ошибка получения ответа.", "OK");
                 }
             }
-        }
-
-        public async Task<string> GetResponceFromNeuralNetwork(string body)
-        {
-            var httpClient = new HttpClient();
-            Task<string> contentsTask = httpClient.GetStringAsync("http://192.168.0.101:5000/api_v1/learning/get_responce?body=" + body); // async method!
-            string contents = await contentsTask;
-            return contents;
         }
     }
 }
