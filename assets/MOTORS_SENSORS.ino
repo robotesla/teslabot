@@ -24,8 +24,8 @@ NewPing sonarRF(TrigPinRightF, EchoPinRightF, MAX_DISTANCE);
 NewPing sonarRB(TrigPinRightB, EchoPinRightB, MAX_DISTANCE);
 
 #define MAXSECTIONCOUNT 10
-//#define DEBUG 1
-//#define DEBUG_PARSE 1
+// #define DEBUG 0
+// #define DEBUG_PARSE 1
 String sections[MAXSECTIONCOUNT];
 
 void setup() {
@@ -139,30 +139,28 @@ void loop() {
       
       if (sections[0] == "SENSORS");
       {
-        if(sections[1] == 0)
+        if(sections[1] == "0")
         {
           unsigned int uS0 = sonarLF.ping_cm();
           Serial.println(uS0);
         }
-        if(sections[1] == 1)
+        if(sections[1] == "1")
         {
           unsigned int uS1 = sonarLB.ping_cm();
           Serial.println(uS1);
         }
-        if(sections[1] == 2)
+        if(sections[1] == "2")
         {
           unsigned int uS2 = sonarRF.ping_cm();
           Serial.println(uS2);
         }
-        if(sections[1] == 3)
+        if(sections[1] == "3")
         {
           unsigned int uS3 = sonarRB.ping_cm();
           Serial.println(uS3);
         }
       }
-
     }
-    printSections();
     clearSections();
   }
 }
