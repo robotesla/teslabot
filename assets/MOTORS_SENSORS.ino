@@ -136,31 +136,99 @@ void loop() {
 
       }
 
-      
+
       if (sections[0] == "SENSORS");
       {
-        if(sections[1] == "0")
+        if (sections[1] == "0")
         {
           unsigned int uS0 = sonarLF.ping_cm();
-          Serial.println(uS0);
+          if (uS0 == 0) {
+            delay(50);
+            uS0 = sonarLF.ping_cm();
+
+            if (uS0 == 0) {
+              delay(50);
+              uS0 = sonarLF.ping_cm();
+
+              if (uS0 == 0) {
+                Serial.println(uS0);
+              }
+            }
+          }
+          else
+          {
+
+            Serial.println(uS0);
+          }
         }
-        if(sections[1] == "1")
+        if (sections[1] == "1")
         {
           unsigned int uS1 = sonarLB.ping_cm();
-          Serial.println(uS1);
+          if (uS1 == 1) {
+            delay(50);
+            uS1 = sonarLB.ping_cm();
+
+            if (uS1 == 1) {
+              delay(50);
+              uS1 = sonarLB.ping_cm();
+
+              if (uS1 == 1) {
+                Serial.println(uS1);
+              }
+            }
+          }
+          else
+          {
+
+            Serial.println(uS1);
+          }
         }
-        if(sections[1] == "2")
+        if (sections[1] == "2")
         {
           unsigned int uS2 = sonarRF.ping_cm();
-          Serial.println(uS2);
+          if (uS2 == 0) {
+            delay(50);
+            uS2 = sonarRF.ping_cm();
+
+            if (uS2 == 0) {
+              delay(50);
+              uS2 = sonarRF.ping_cm();
+
+              if (uS2 == 0) {
+                Serial.println(uS2);
+              }
+            }
+          }
+          else
+          {
+
+            Serial.println(uS2);
+          }
         }
-        if(sections[1] == "3")
+        if (sections[1] == "3")
         {
           unsigned int uS3 = sonarRB.ping_cm();
-          Serial.println(uS3);
+          if (uS3 == 0) {
+            delay(50);
+            uS3 = sonarRB.ping_cm();
+
+            if (uS3 == 0) {
+              delay(50);
+              uS3 = sonarRB.ping_cm();
+
+              if (uS3 == 0) {
+                Serial.println(uS3);
+              }
+            }
+          }
+          else
+          {
+
+            Serial.println(uS3);
+          }
         }
       }
+      clearSections();
     }
-    clearSections();
   }
 }
