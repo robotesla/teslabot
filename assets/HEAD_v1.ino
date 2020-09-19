@@ -1,6 +1,6 @@
 #include <Servo.h>
 #include <Stepper.h>
-Stepper stepper(20, 2, 3, 4, 5);
+Stepper stepper(500, 2, 3, 4, 5);
 #define MAXsectionsCOUNT 10
 #define LEFT_STOPPER 11
 #define RIGHT_STOPPER 12
@@ -15,6 +15,8 @@ int imm1;
 int xdef1;
 int storona1;
 int del;
+int speedx;
+int timex;
 void setup() {
   pitch_servo.attach(9);
   pitch_servo.write(30);
@@ -63,13 +65,21 @@ void parseStringFromSerial() {
 
 void angservo(int angle, int sp)
 {
+  Serial.println("V aNG2");
   sp = 255 - constrain(sp, 0, 255);
   int servoangle = angle + del;
   for (int i = del; servoangle >= i; i++)
   {
-    del = pitch_servo.read();
-    pitch_servo.write(i);
-    delay(sp);
+    if (sections[1] == "STOP_ACTION")
+    {
+
+    }
+    else
+    {
+      pitch_servo.write(i);
+      Serial.println(i);
+      delay(sp);
+    }
   }
   Serial.println("succes");
 
@@ -77,13 +87,30 @@ void angservo(int angle, int sp)
 
 void angservo2(int angle, int sp)
 {
-  del = pitch_servo.read();
+  del = 0;  //pitch_servo.read();
   sp = 255 - constrain(sp, 0, 255);
   int servoangle = angle + del;
   for (int i = del; servoangle <= i; i--)
   {
-    pitch_servo.write(i);
-    delay(sp);
+    if (Serial.available())
+    {
+      Serial.println("avaib");
+      parseStringFromSerial();
+      if (sections[0] == "HEAD")
+      {
+        if (sections[1] == "STOP_ACTION")
+        {
+          break;
+        }
+      }
+    }
+    else
+    {
+      pitch_servo.write(i);
+      Serial.println(i);
+      delay(sp);
+    }
+    Serial.println("wait");
   }
   Serial.println("succes");
 }
@@ -109,11 +136,19 @@ byte stoppers()
   if (digitalRead(LEFT_STOPPER))
   {
     Serial.println("STOPPER LEFT");
+    digitalWrite(2, LOW);
+    digitalWrite(3, LOW);
+    digitalWrite(4, LOW);
+    digitalWrite(5, LOW);
     return 1;
   }
   if (digitalRead(RIGHT_STOPPER))
   {
     Serial.println("STOPPER RIGHT");
+    digitalWrite(2, LOW);
+    digitalWrite(3, LOW);
+    digitalWrite(4, LOW);
+    digitalWrite(5, LOW);
     return 1;
   }
   else
@@ -121,6 +156,8 @@ byte stoppers()
     return 0;
   }
 }
+
+
 void loop() {
 
 
@@ -145,12 +182,14 @@ void loop() {
       {
         xdef = 1;
         imm = 1;
+        storona = 1;
 
       }
       if (sections[1] == "YAW_RIGHT")
       {
         xdef = 1;
         imm = 1;
+        storona = -1;
       }
       if (sections[1] == "GET_ACTION")
       {
@@ -162,21 +201,30 @@ void loop() {
       }
       if (sections[2] != "")
       {
-        stepper.setSpeed(String(sections[2]).toInt());
+        speedx = String(sections[2]).toInt();
+        speedx = map(speedx, 0 , 255 , 45 , 110);
+        speedx = constrain(speedx, 45, 110);
+        stepper.setSpeed(speedx);
       }
 
       clearsections();
+      timex = millis();
       if (xdef == 1)
       {
         while (imm)
         {
           if (!stoppers())
           {
-            stepper.step(20 * storona);// 1 step = 20
+            Serial.println((millis() - timex) / 1000);
+            stepper.step(10 * storona);//20 * storona
           }
-          else
+          if (stoppers())
           {
-            stepper.step(-20); //rollback
+            imm = 0;
+            digitalWrite(2, LOW);
+            digitalWrite(3, LOW);
+            digitalWrite(4, LOW);
+            digitalWrite(5, LOW);
           }
           if (Serial.available())
           {
@@ -198,6 +246,10 @@ void loop() {
               {
                 xdef = 0;
                 imm = 0;
+                digitalWrite(2, LOW);
+                digitalWrite(3, LOW);
+                digitalWrite(4, LOW);
+                digitalWrite(5, LOW);
               }
             }
           }
