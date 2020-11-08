@@ -1,2 +1,2 @@
-keyboard~=0.13.5
-serial~=0.0.97
+paramiko>=2.7.2
+keyboard>=0.13.5
