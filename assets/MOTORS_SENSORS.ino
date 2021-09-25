@@ -151,6 +151,26 @@ void loop() {
           digitalWrite(IN_2, LOW);
           analogWrite(EN_B, String(sections[2]).toInt() + CALIBRATE_SPEED_R);
         }
+        else if (section[1] == "MANUAL_STOP")
+        {
+          if (section[2] == "LEFT")
+          {
+            digitalWrite(IN_3, LOW);
+            digitalWrite(IN_4, LOW);
+          }
+          else if (section[2] == "RIGHT")
+          {
+            digitalWrite(IN_1, LOW);
+            digitalWrite(IN_2, LOW);
+          }
+          else
+          {
+            digitalWrite(IN_1, LOW);
+            digitalWrite(IN_2, LOW);
+            digitalWrite(IN_3, LOW);
+            digitalWrite(IN_4, LOW);
+          }
+        }
 
       }
 
