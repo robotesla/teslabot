@@ -103,7 +103,7 @@ void loop() {
       {
 
         // for ros usage
-        if (section[1] != "MANUAL_LEFT" && section[1] != "MANUAL_RIGHT")
+        if (section[1] != "MANUAL_LEFT" && section[1] != "MANUAL_RIGHT" && section[1] != "MANUAL_STOP")
         {
           analogWrite(EN_A, String(sections[2]).toInt() + CALIBRATE_SPEED_L);
           analogWrite(EN_B, String(sections[2]).toInt() + CALIBRATE_SPEED_R);
@@ -163,7 +163,7 @@ void loop() {
             digitalWrite(IN_1, LOW);
             digitalWrite(IN_2, LOW);
           }
-          else
+          else if (section[2] == "BOTH")
           {
             digitalWrite(IN_1, LOW);
             digitalWrite(IN_2, LOW);
