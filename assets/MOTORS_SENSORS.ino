@@ -102,8 +102,13 @@ void loop() {
       if (sections[0] == "MOTORS")
       {
 
-        analogWrite(EN_A, String(sections[2]).toInt() + CALIBRATE_SPEED_L);
-        analogWrite(EN_B, String(sections[2]).toInt() + CALIBRATE_SPEED_R);
+        // for ros usage
+        if (section[1] != "MANUAL_LEFT" && section[1] != "MANUAL_RIGHT")
+        {
+          analogWrite(EN_A, String(sections[2]).toInt() + CALIBRATE_SPEED_L);
+          analogWrite(EN_B, String(sections[2]).toInt() + CALIBRATE_SPEED_R);
+        }
+        
 
         if (sections[1] == "MOVE_FORWARD")
         {
@@ -132,6 +137,19 @@ void loop() {
           digitalWrite(IN_2, LOW);
           digitalWrite(IN_3, LOW);
           digitalWrite(IN_4, LOW);
+        }
+        // for ros usage
+        if (section[1] == "MANUAL_LEFT")
+        {
+          digitalWrite(IN_3, LOW);
+          digitalWrite(IN_4, HIGH);
+          analogWrite(EN_A, String(sections[2]).toInt() + CALIBRATE_SPEED_L);
+        }
+        else if (section[1] == "MANUAL_RIGHT")
+        {
+          digitalWrite(IN_1, HIGH);
+          digitalWrite(IN_2, LOW);
+          analogWrite(EN_B, String(sections[2]).toInt() + CALIBRATE_SPEED_R);
         }
 
       }
